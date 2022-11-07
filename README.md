@@ -5,13 +5,14 @@ Simon likes cats and he travels around the world. His cat names “Cat” gives 
 Simon receives doctor’s bill of 1 Mio. CHF which he passes to his Health Insurance. The Health Insurance “Medical Cat Health Insurance” shortened MCHI is in doubt about the invoice and request CHECKMEDICAL in Bern. CHECKMEDICAL is specialised in checking medical bills for Health insurances. They objected the invoice by different Medical Codes (e.g., ICD, DRG, Tarpy, Tarmed etc.) which was not suitable for that case in relation to the doctor’s documentation. 
 Does Simon’s medical bill get paid? On what basis are the invoices objected from Health Insurance? 
 
-## Members
- - Lukasz Kaczmarek
- - Banujan Ragunathan
- - Andreas Hetschel
- - Grégory Witmer
+# High Level Process
+<img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://user-images.githubusercontent.com/106623917/200399156-4833248c-4116-4848-ace1-f14bcfff3c54.png">
 
-## We decided to go with the case number 4, Insurance
+# Features
+
+
+# Methodologies
+The project team activated a Trello board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
 
 ## Organisational
 
@@ -22,6 +23,12 @@ Merge request names follow the pattern: `<Requirement- or Issue ID>: <Title/Desc
 Examples: Branch `2/Addition-of-Code-Styles-to-Readme` will result in the PR: `2: Addition of Code Styles to Readme`
 Commits always have a commit message in the form of an action.
 Example: Commit `Add commit style to Readme-file` into branch `2/Addition-of-Code-Styles-to-Readme`.
+
+## Members
+ - Lukasz Kaczmarek
+ - Banujan Ragunathan
+ - Andreas Hetschel
+ - Grégory Witmer
 
 ## References
 1. https://whatfix.com/blog/insurance-client-onboarding
