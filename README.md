@@ -2,11 +2,19 @@
 
 ## Introduction
 
+Cat have been human companions for millenia, and their fanbase seems to be ever and ever rising, with an estimated 1.8 million living in Swiss households in 2022 (https://de.statista.com/statistik/daten/studie/283732/umfrage/katzen-in-der-schweiz/). Yet, their unpredictable stubborness, paired with fast reflexes and paws full of pointy daggers, presents a constant, potentially costly risk to friends of felines and the shhared household.
 
-## Scenario
-Simon likes cats and he travels around the world. His cat names “Cat” gives him company in every travel. Most of the time, Cat eats, lies around, explores different environments and areas. Sometimes, Cat gives Simon hard times. Especially, if Simon forgets to feed his cat. In such cases, Cat tries to get back at his owner. In particular, Cat tries to do it with tricks. Peculiarly, the cat tries to wake up him in different ways to get fed. Therefore, Cat tries to throw meows around. Cat tries also to break a vase. The loud sound should wake up Simon, but it did not help. Moreover, she climbs onto cupboard try to jump on Simon’s face. But suddenly the cupboard falls on Simon and hurts him. This result in several injury in the face, broken bones, lengthy treatment, and long stay in the hospital. 
-Simon receives doctor’s bill of 1 Mio. CHF which he passes to his Health Insurance. The Health Insurance “Medical Cat Health Insurance” shortened MCHI is in doubt about the invoice and request CHECKMEDICAL in Bern. CHECKMEDICAL is specialised in checking medical bills for Health insurances. They objected the invoice by different Medical Codes (e.g., ICD, DRG, Tarpy, Tarmed etc.) which was not suitable for that case in relation to the doctor’s documentation. 
-Does Simon’s medical bill get paid? On what basis are the invoices objected from Health Insurance? 
+That is why Cat-Astrophy Insurances (CAI™) was founded. For a relatively low monthly fee, clients can be refunded for damages caused by their tiny tigers, be it shredded curtains (damage to property, covered 80%), single visits to the general practitioner (only one visit, and it has to be cat-related injury. Covered 50%) or medicine (20%. The two best sellers are pain killers and creams for slashed forearms. Also, per-case maxima were established for each of the three expense categories.
+
+When applying for insurance, the insurance would send someone to the client to make sure only someone with a cat would be granted coverage. Also, it turned out that people would try to get refunds for all kinds of expenses, even non cat-related. 
+
+Oftentimes, after the loss of a pet, people would just stop paying their monthly fees, as sending a fax posed to much of a hassle. 
+
+All of the above was painstaking for CAI, which is why their elderly CEO, during a coke-fuled debauchery (meaning, a normal tuesday at a Swiss insurance) decided to give digitalization a try, and asked FdV (us) to set up the following processes:
+
+ - People should be able to fill out a form, with information and the picture of their cat, and instantly be told whether they were granted insurance.
+ - Through an online form, they should be able to send in a list of costs, that are checked against the maxima.
+ - They should be reminded of open fees automatically, but have the possiblity to terminate the contract online.
 
 # High Level Process
 <img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://user-images.githubusercontent.com/106623917/200399156-4833248c-4116-4848-ace1-f14bcfff3c54.png">
