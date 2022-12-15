@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0e0wucc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.2" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0e0wucc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.5.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
   <bpmn:collaboration id="Collaboration_0pol8rw">
     <bpmn:participant id="Participant_07ze0rn" name="Checkmedical" processRef="Process_1q2if90" />
-    <bpmn:participant id="Participant_1t05eoh" name="Medical Health Insurance" processRef="Process_1pu3vid" />
+    <bpmn:participant id="Participant_1t05eoh" name="Medical Health Insurance" processRef="MH_INSURANCE" />
     <bpmn:participant id="Participant_0i110tx" name="Customer" />
-    <bpmn:messageFlow id="Flow_05damow" sourceRef="Participant_0i110tx" targetRef="StartEvent_1" />
+    <bpmn:messageFlow id="Flow_05damow" sourceRef="Participant_0i110tx" targetRef="StartInsuranceProcess" />
   </bpmn:collaboration>
   <bpmn:process id="Process_1q2if90" isExecutable="false">
     <bpmn:sequenceFlow id="Flow_0ez3dw4" sourceRef="Activity_1vtdwp1" targetRef="Activity_1n3x40s" />
@@ -36,15 +36,7 @@
       <bpmn:outgoing>Flow_1gw6nm2</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
-  <bpmn:process id="Process_1pu3vid" isExecutable="false">
-    <bpmn:startEvent id="StartEvent_1" name="Medical bill received">
-      <bpmn:outgoing>Flow_045zopf</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0cntjqs" />
-    </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_11xixqo" name="Check customer details">
-      <bpmn:incoming>Flow_045zopf</bpmn:incoming>
-      <bpmn:outgoing>Flow_1rwbt6k</bpmn:outgoing>
-    </bpmn:serviceTask>
+  <bpmn:process id="MH_INSURANCE" name="H_INSURANCE" isExecutable="true">
     <bpmn:exclusiveGateway id="Gateway_0jinnqu" name="Customer insured?">
       <bpmn:incoming>Flow_1rwbt6k</bpmn:incoming>
       <bpmn:incoming>Flow_0w9hdh8</bpmn:incoming>
@@ -60,16 +52,30 @@
       <bpmn:incoming>Flow_170gd1i</bpmn:incoming>
       <bpmn:outgoing>Flow_068zgy7</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_045zopf" sourceRef="StartEvent_1" targetRef="Activity_11xixqo" />
+    <bpmn:sequenceFlow id="Flow_045zopf" sourceRef="StartInsuranceProcess" targetRef="Activity_11xixqo" />
     <bpmn:sequenceFlow id="Flow_1rwbt6k" sourceRef="Activity_11xixqo" targetRef="Gateway_0jinnqu" />
-    <bpmn:sequenceFlow id="Flow_0w9hdh8" name="yes" sourceRef="Gateway_1k06xjm" targetRef="Gateway_0jinnqu" />
-    <bpmn:sequenceFlow id="Flow_0d5o9q4" name="yes" sourceRef="Gateway_0jinnqu" targetRef="Activity_0cucksn" />
-    <bpmn:sequenceFlow id="Flow_05l1tak" name="no" sourceRef="Gateway_0jinnqu" targetRef="Gateway_1wfftb5" />
-    <bpmn:sequenceFlow id="Flow_0xjcs8v" name="call" sourceRef="Gateway_1wfftb5" targetRef="Activity_03auzcy" />
-    <bpmn:sequenceFlow id="Flow_170gd1i" name="mail" sourceRef="Gateway_1wfftb5" targetRef="Activity_0wjq1yy" />
+    <bpmn:sequenceFlow id="Flow_0w9hdh8" name="yes" sourceRef="Gateway_1k06xjm" targetRef="Gateway_0jinnqu">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0d5o9q4" name="yes" sourceRef="Gateway_0jinnqu" targetRef="Activity_0cucksn">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_05l1tak" name="no" sourceRef="Gateway_0jinnqu" targetRef="Gateway_1wfftb5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0xjcs8v" name="phone" sourceRef="Gateway_1wfftb5" targetRef="Activity_03auzcy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${preferredMeanOfContact==="phone"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_170gd1i" name="mail" sourceRef="Gateway_1wfftb5" targetRef="Activity_0wjq1yy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${preferredMeanOfContact==="mail"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0c3si67" sourceRef="Activity_03auzcy" targetRef="Gateway_1k06xjm" />
-    <bpmn:sequenceFlow id="Flow_1vr1mdk" name="No" sourceRef="Gateway_1c04vn2" targetRef="Gateway_1ud37jh" />
-    <bpmn:sequenceFlow id="Flow_12sdyku" name="no" sourceRef="Gateway_1k06xjm" targetRef="Event_1pjv54q" />
+    <bpmn:sequenceFlow id="Flow_1vr1mdk" name="No" sourceRef="Gateway_1c04vn2" targetRef="Gateway_1ud37jh">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isBillSuspicious}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_12sdyku" name="no" sourceRef="Gateway_1k06xjm" targetRef="Event_1pjv54q">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="Gateway_1c04vn2" name="Medical bill suspicious?">
       <bpmn:incoming>Flow_1c6z44n</bpmn:incoming>
       <bpmn:outgoing>Flow_1vr1mdk</bpmn:outgoing>
@@ -77,7 +83,9 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0sui50h" sourceRef="Activity_0cucksn" targetRef="Activity_15iw8my" />
     <bpmn:sequenceFlow id="Flow_1c6z44n" sourceRef="Activity_15iw8my" targetRef="Gateway_1c04vn2" />
-    <bpmn:sequenceFlow id="Flow_1h3f88a" name="yes" sourceRef="Gateway_1c04vn2" targetRef="Activity_0apm832" />
+    <bpmn:sequenceFlow id="Flow_1h3f88a" name="yes" sourceRef="Gateway_1c04vn2" targetRef="Activity_0apm832">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isBillSuspicious}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:serviceTask id="Activity_0t6fje4" name="Inform customer about payment">
       <bpmn:incoming>Flow_1wratum</bpmn:incoming>
       <bpmn:outgoing>Flow_0l03dhi</bpmn:outgoing>
@@ -116,8 +124,12 @@
     <bpmn:sequenceFlow id="Flow_12epv4d" sourceRef="Gateway_10snki9" targetRef="Activity_1n0o3jl" />
     <bpmn:sequenceFlow id="Flow_0rhrhjr" sourceRef="Activity_1n0o3jl" targetRef="Gateway_1hmg1qe" />
     <bpmn:sequenceFlow id="Flow_12rxwxo" sourceRef="Gateway_1ud37jh" targetRef="Activity_1q8rj4y" />
-    <bpmn:sequenceFlow id="Flow_039p3fo" name="no" sourceRef="Gateway_0owjyb3" targetRef="Gateway_1ud37jh" />
-    <bpmn:sequenceFlow id="Flow_0d4i2fr" name="yes" sourceRef="Gateway_0owjyb3" targetRef="Gateway_1bos3b6" />
+    <bpmn:sequenceFlow id="Flow_039p3fo" name="no" sourceRef="Gateway_0owjyb3" targetRef="Gateway_1ud37jh">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isCaseRejected}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0d4i2fr" name="yes" sourceRef="Gateway_0owjyb3" targetRef="Gateway_1bos3b6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isCaseRejected}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0xwabza" sourceRef="Gateway_1cjn92g" targetRef="Event_1hrbfwa" />
     <bpmn:sequenceFlow id="Flow_1k6h2vf" sourceRef="Gateway_1bos3b6" targetRef="Activity_00zc9y0" />
     <bpmn:sequenceFlow id="Flow_1ri7rz8" sourceRef="Activity_00zc9y0" targetRef="Gateway_1cjn92g" />
@@ -188,6 +200,13 @@
       <bpmn:incoming>Flow_12rxwxo</bpmn:incoming>
       <bpmn:outgoing>Flow_0tp7xl4</bpmn:outgoing>
     </bpmn:scriptTask>
+    <bpmn:startEvent id="StartInsuranceProcess" name="Medical bill received">
+      <bpmn:outgoing>Flow_045zopf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_11xixqo" name="Check customer details">
+      <bpmn:incoming>Flow_045zopf</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rwbt6k</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0pol8rw">
@@ -242,16 +261,6 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1t05eoh_di" bpmnElement="Participant_1t05eoh" isHorizontal="true">
         <dc:Bounds x="152" y="170" width="2578" height="880" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1tr7je3_di" bpmnElement="StartEvent_1">
-        <dc:Bounds x="222" y="412" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="213" y="455" width="55" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_18rv9vt_di" bpmnElement="Activity_11xixqo">
-        <dc:Bounds x="310" y="390" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0jinnqu_di" bpmnElement="Gateway_0jinnqu" isMarkerVisible="true">
@@ -360,6 +369,15 @@
       <bpmndi:BPMNShape id="Activity_0icynik_di" bpmnElement="Activity_1q8rj4y">
         <dc:Bounds x="1750" y="540" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lemfd9_di" bpmnElement="StartInsuranceProcess">
+        <dc:Bounds x="222" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="213" y="455" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0tfqum5_di" bpmnElement="Activity_11xixqo">
+        <dc:Bounds x="310" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_045zopf_di" bpmnElement="Flow_045zopf">
         <di:waypoint x="258" y="430" />
         <di:waypoint x="310" y="430" />
@@ -397,7 +415,7 @@
         <di:waypoint x="690" y="360" />
         <di:waypoint x="800" y="360" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="697" y="340" width="17" height="14" />
+          <dc:Bounds x="690" y="340" width="31" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_170gd1i_di" bpmnElement="Flow_170gd1i">
