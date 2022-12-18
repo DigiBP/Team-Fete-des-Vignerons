@@ -20,7 +20,7 @@
       <bpmn:outgoing>Flow_0xjcs8v</bpmn:outgoing>
       <bpmn:outgoing>Flow_170gd1i</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_1c04vn2" name="Medical bill suspicious?">
+    <bpmn:exclusiveGateway id="Gateway_1c04vn2" name="Further checking by MC needed?">
       <bpmn:incoming>Flow_1c6z44n</bpmn:incoming>
       <bpmn:outgoing>Flow_1vr1mdk</bpmn:outgoing>
       <bpmn:outgoing>Flow_1h3f88a</bpmn:outgoing>
@@ -91,12 +91,13 @@
     </bpmn:userTask>
     <bpmn:startEvent id="StartInsuranceProcess" name="Medical bill received">
       <bpmn:extensionElements>
-        <camunda:formData>
+        <camunda:formData businessKey="businessKey">
           <camunda:formField id="isExistingCustomer" label="Is the request coming from an existing customer?" type="boolean" />
           <camunda:formField id="preferredMeanOfContact" label="preferredMeanOfContact" type="string" />
           <camunda:formField id="amount" label="amount" type="long" />
           <camunda:formField id="customerClass" label="customerClass" type="string" />
           <camunda:formField id="icd" label="ICD" type="string" />
+          <camunda:formField id="businessKey" label="businessKey" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_045zopf</bpmn:outgoing>
@@ -121,14 +122,6 @@
     <bpmn:userTask id="Activity_1n0o3jl" name="Register the case on database">
       <bpmn:incoming>Flow_12epv4d</bpmn:incoming>
       <bpmn:outgoing>Flow_0rhrhjr</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_15iw8my" name="Analyse the case on ICD">
-      <bpmn:incoming>Flow_0sui50h</bpmn:incoming>
-      <bpmn:outgoing>Flow_1c6z44n</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_0cucksn" name="Check threshold">
-      <bpmn:incoming>Flow_0d5o9q4</bpmn:incoming>
-      <bpmn:outgoing>Flow_0sui50h</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sendTask id="Activity_0apm832" name="Send to Checkmedical" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Ask_CM&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}">
       <bpmn:incoming>Flow_1h3f88a</bpmn:incoming>
@@ -162,10 +155,10 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1c6z44n" sourceRef="Activity_15iw8my" targetRef="Gateway_1c04vn2" />
     <bpmn:sequenceFlow id="Flow_1vr1mdk" name="No" sourceRef="Gateway_1c04vn2" targetRef="Gateway_1ud37jh">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isBillSuspicious}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!needsMC}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1h3f88a" name="yes" sourceRef="Gateway_1c04vn2" targetRef="Activity_0apm832">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isBillSuspicious}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${needsMC}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0tp7xl4" sourceRef="Activity_1q8rj4y" targetRef="Gateway_10snki9" />
     <bpmn:sequenceFlow id="Flow_1wratum" sourceRef="Gateway_10snki9" targetRef="Activity_0t6fje4" />
@@ -196,6 +189,27 @@
     <bpmn:sequenceFlow id="Flow_045zopf" sourceRef="StartInsuranceProcess" targetRef="Activity_11xixqo" />
     <bpmn:sequenceFlow id="Flow_0sui50h" sourceRef="Activity_0cucksn" targetRef="Activity_15iw8my" />
     <bpmn:sequenceFlow id="Flow_0cryr2g" sourceRef="Activity_0apm832" targetRef="CM_Answer" />
+    <bpmn:businessRuleTask id="Activity_0cucksn" name="Check threshold" camunda:resultVariable="threshold" camunda:decisionRef="Decision_0copolb" camunda:mapDecisionResult="singleEntry" camunda:decisionRefTenantId="fetevignerons">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="customerClass">${customerClass}</camunda:inputParameter>
+          <camunda:outputParameter name="threshold">${threshold}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0d5o9q4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sui50h</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:businessRuleTask id="Activity_15iw8my" name="Analyse the case on ICD" camunda:resultVariable="isCatCase" camunda:decisionRef="Decision_1rxwil9" camunda:mapDecisionResult="singleResult" camunda:decisionRefTenantId="fetevignerons">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="explanation">${isCatCase.explanation}</camunda:outputParameter>
+          <camunda:outputParameter name="isCatCase">${isCatCase.isCatCase}</camunda:outputParameter>
+          <camunda:outputParameter name="needsMC">${isCatCase.needsMC}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0sui50h</bpmn:incoming>
+      <bpmn:outgoing>Flow_1c6z44n</bpmn:outgoing>
+    </bpmn:businessRuleTask>
   </bpmn:process>
   <bpmn:message id="Message_0cp5fdb" name="StartMIProcess" />
   <bpmn:process id="Process_0puc619" isExecutable="false">
@@ -253,7 +267,7 @@
       <bpmndi:BPMNShape id="Gateway_1c04vn2_di" bpmnElement="Gateway_1c04vn2" isMarkerVisible="true">
         <dc:Bounds x="1075" y="555" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1071" y="518" width="58" height="27" />
+          <dc:Bounds x="1059" y="518" width="82" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0thay01_di" bpmnElement="Gateway_10snki9">
@@ -336,18 +350,19 @@
       <bpmndi:BPMNShape id="Activity_0wa4ayp_di" bpmnElement="Activity_1n0o3jl">
         <dc:Bounds x="2320" y="660" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1fjpqfc_di" bpmnElement="Activity_15iw8my">
-        <dc:Bounds x="800" y="540" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1pa68j9_di" bpmnElement="Activity_0cucksn">
-        <dc:Bounds x="610" y="540" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_187ha1q_di" bpmnElement="Activity_0apm832">
         <dc:Bounds x="1150" y="780" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0dn3tay_di" bpmnElement="CM_Answer">
         <dc:Bounds x="1332" y="802" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04z2xvf_di" bpmnElement="Activity_0cucksn">
+        <dc:Bounds x="610" y="540" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_187uito_di" bpmnElement="Activity_15iw8my">
+        <dc:Bounds x="800" y="540" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1rwbt6k_di" bpmnElement="Flow_1rwbt6k">
         <di:waypoint x="410" y="430" />
