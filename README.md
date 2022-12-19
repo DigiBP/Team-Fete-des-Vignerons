@@ -23,7 +23,7 @@ Simon receives the medical bill of 1 Mio. CHF which he passes to his Health Insu
 Does Simon’s medical bill get paid? On what basis are the invoices rejected from Health Insurance? 
 
 # High Level Process
-<img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://user-images.githubusercontent.com/106623917/200399156-4833248c-4116-4848-ace1-f14bcfff3c54.png">
+<img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://github.com/DigiBP/Team-Fete-des-Vignerons/blob/2d82ac211068be3f187db763e93540a7dc2bd41d/Scenario_Flow_Chart.png">
 
 # Assumptions
 
