@@ -2,25 +2,27 @@
 
 ## Introduction
 
-Cats have been human companions for millenia, and their fanbase seems to be ever and ever rising, with an estimated 1.8 million living in Swiss households in 2022 (https://de.statista.com/statistik/daten/studie/283732/umfrage/katzen-in-der-schweiz/). Yet, their unpredictable stubborness, paired with fast reflexes and paws full of pointy daggers, presents a constant, potentially costly risk to friends of felines and the shhared household.
-
-That is why Cat-Astrophy Insurances (CAI™) was founded. For a relatively low monthly fee, clients can be refunded for damages caused by their tiny tigers, be it shredded curtains (damage to property, covered 80%), single visits to the general practitioner (only one visit, and it has to be cat-related injury. Covered 50%) or medicine (20%. The two best sellers are pain killers and creams for slashed forearms. Also, per-case maxima were established for each of the three expense categories.
-
-But, as it turned out, people would try to get refunds for all kinds of expenses, even non cat-related. 
-
-Oftentimes, after the loss of a pet, people would just stop paying their monthly fees, as sending a fax posed to much of a hassle. 
-
-All of the above was painstaking for CAI, which is why their elderly CEO, during a coke-fuled debauchery (meaning, a normal tuesday at a Swiss insurance) decided to give digitalization a try, and asked FdV (us) to set up the following processes:
-
- - Through an online form, they should be able to send in a list of costs, that are checked against the maxima.
- - They should be reminded of open fees automatically, but have the possiblity to terminate the contract online.
-
+This project is a part of the assignment of the module Digitalization of Business Processes in Master of Science in Medical Informatics and in Business Information Systems. Students have to digitalise a pro-cess and deliver modelling artefacts as Business Process Model and Notation and Decision Model and Notation with the appropriate source file and code. Furthermore, students provide documentation of the complete process and the link to the workflows and instantiations. 
 
 ## Scenario
+Cats have been human companions for millennia, and their fanbase seems to be ever and ever rising, with an estimated 1.8 million living in Swiss households in 2022 (https://de.statista.com/statistik/daten/studie/283732/umfrage/katzen-in-der-schweiz/). 
 
-Simon likes cats and he travels around the world. His cat is called “Cat” and goes with him everywhere he travels. Most of the time, Cat eats, lies around, explores different environments and areas. Sometimes, Cat can be challenging. Especially, if Simon forgets to feed him. In those cases, Cat tries to get back at his owner. In particular, Cat tries to do it with tricks. Peculiarly, the cat tries to wake up him in different ways to get fed. Therefore, Cat walks aroung meowing. Cat intentionally broke a vase, so the loud smashing sound would wake Simon up, but it was not successful. Moreover, Cat climbs onto the cupboard to try to jump on Simon’s face. But suddenly the cupboard falls on Simon and hurts him. This result in several injury in Simon's face, broken bones, lengthy treatment, and long stay in the hospital. 
-Simon receives the medical bill of 1 Mio. CHF which he passes to his Health Insurance. The Health Insurance “Medical Cat Health Insurance” shortened MCHI is in doubt about the invoice and requests a second opinion in Bern. CHECKMEDICAL specialises in checking medical bills for Health insurances. They disputed the invoice by different Medical Codes (e.g., ICD, DRG, Tarpy, Tarmed etc.) which were not suitable for that case in relation to the doctor’s documentation. 
-Does Simon’s medical bill get paid? On what basis are the invoices rejected from Health Insurance? 
+In this scenario, one cat named “Cat” plays a leading role with his owner Simon. Most of the time, Cat eats, lie around, and explores different environments and areas. Sometimes, Cat can be challenging. Especially, if Simon forgets to feed him. In those cases, Cat tries to get back at his owner. Peculiarly, the cat tries to wake up him in different ways to get fed. Therefore, Cat walks around meowing. Cat intentionally broke a vase, so the loud smashing sound would wake Simon up, but it was not successful. Moreover, Cat climbs onto the cupboard to try to jump on Simon’s face. But suddenly the cupboard falls on Simon and hurts him. This resulted in several injuries on Simon's face, broken bones, lengthy treatment, and a long stay in the hospital. Finally, Simon receives the medical bill of 1 Mio. CHF which he passes to his Health Insurance. 
+
+The Health Insurance “Medical Health Insurance” shortened MHI is in doubt about the invoice. In gen-eral, more and more people try to get refunds for all kinds of expenses even if they are not a customer of MHI. Furthermore, even the hospitals use incorrect ICD-Codes to get treatment and hospital stays reimbursed which does not rely on the main cause of the admission to the hospital. Therefore, MHI agents check all medical bills in detail by their hands and disputed the invoice by different Medical Codes (e.g., ICD) which were not suitable for that case in relation to the doctor’s documentation. MHI work along with CHECKMEDICAL from Bern for further assistance. They are focused on checking medi-cal bills based on their long-term medical experience and support MHI in clearing their fraudulent medi-cal bills. 
+
+All previous points were painstaking and the agent of MHI needs a lot of time for it. Therefore, the el-derly CEO of MHI decided to give digitalization a try, and asked FHNW students to set up the following processes:
+
+ - Through an online form, the customer should be able to send in the medical bill with their details 
+ - The system checks automatically if the customer is one of the existing clientele. 
+ - Non-registered customers should be contacted and will be handled as potential customers for the future. 
+ - The system runs through the details of the customer and checks the insurance policy and the duration of the contract. 
+ - The system goes through the ICD on the medical bill and verifies if the case can be referenced to the case of Simon. 
+ - The system will send a mail to CHECKMEDICAL company for detailed clearance if the ICD does not rely to the case of Simon.
+ - Medical bill with incorrect ICD will be rejected and the customer and hospital will be informed. 
+ - The refund amount will be calculated if the medical bill reference to correct ICD and to an existing customer. 
+ - The refund amount will be calculated according to insurance policy type and duration of the contract with MHI.
+ - As a final part, the customer will be informed about the payment, the case will be registered in MHI-Database and the financial department will be informed to release the payment. 
 
 # High Level Process
 <img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://github.com/DigiBP/Team-Fete-des-Vignerons/blob/2d82ac211068be3f187db763e93540a7dc2bd41d/Scenario_Flow_Chart.png">
@@ -29,8 +31,10 @@ Does Simon’s medical bill get paid? On what basis are the invoices rejected fr
 
 # Features
 
+
+
 # Methodologies
-The project team activated a Trello board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
+The project team activated a Teams board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
 
 ## Organisational
 
