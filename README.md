@@ -10,19 +10,19 @@ Cats have been human companions for millennia, and their fanbase seems to be eve
 
 In this scenario, one cat named “Cat” plays a leading role with his owner Simon. Most of the time, Cat eats, lie around, and explores different environments and areas. Sometimes, Cat can be challenging. Especially, if Simon forgets to feed him. In those cases, Cat tries to get back at his owner. Peculiarly, the cat tries to wake up him in different ways to get fed. Therefore, Cat walks around meowing. Cat intentionally broke a vase, so the loud smashing sound would wake Simon up, but it was not successful. Moreover, Cat climbs onto the cupboard to try to jump on Simon’s face. But suddenly the cupboard falls on Simon and hurts him. This resulted in several injuries on Simon's face, broken bones, lengthy treatment, and a long stay in the hospital. Finally, Simon receives the medical bill which he passes to his Health Insurance. 
 
-The Health Insurance “Medical Health Insurance” shortened MHI is in doubt about the invoice. In general, more and more frauds try to get refunds for all kinds of medical expenses even if they are not a customer of MHI. Furthermore, even the hospitals use incorrect ICD-Codes to get treatment and hospital stays reimbursed which does not rely on the main cause of the admission to the hospital. Therefore, MHI agents check all medical bills in detail by their hands and disputed the invoice by different Medical Codes (e.g., ICD) which were not suitable for that case in relation to the doctor’s documentation. MHI work along with CHECKMEDICAL from Bern for further assistance. They are focused on checking medical bills based on their long-term medical experience and support MHI in clearing their fraudulent medical bills. 
+The Health Insurance “Medical Health Insurance” shortened MHI is in doubt about the invoice. In general, more and more frauds try to get refunds for all kinds of medical expenses even if they are not a customer of MHI. Furthermore, even the hospitals use incorrect ICD to get treatment and hospital stays reimbursed which does not rely on the main cause of the admission to the hospital. Therefore, MHI agents check all medical bills in detail by their hands and disputed the invoice by different Medical Codes (e.g., ICD) which were not suitable for that case in relation to the doctor’s documentation. MHI work along with CHECKMEDICAL from Bern for further assistance. They are focused on checking medical bills based on their long-term medical experience and support MHI in clearing their fraudulent medical bills. 
 
 All previous points were painstaking and lets to time-cost. Therefore, the elderly CEO of MHI decided to give digitalization a try, and asked FHNW students to set up the following processes:
 
  - Through an online form, the customer should be able to send in the medical bill with their details 
  - The system should check automatically if the customer is one of the existing clientele. 
  - Non-registered customers should be contacted and will be handled as potential customers for the future. 
- - The system should run through the details of the customer and checks the insurance policy and the duration of the contract. 
+ - The system should run through the details of the customer, should check the details, and should give out the percentage of the refund according to the customers insurance type. 
  - The system should go through the ICD on the medical bill and verifies if the case can be referenced to the case. 
- - The system should send a mail to CHECKMEDICAL company for detailed clearance if the ICD does not rely to the case.
- - Medical bill with incorrect ICD will be rejected and the customer and hospital will be informed. 
+ - The system should send a mail to Checkmedical company for detailed clearance if the ICD does not rely on the case.
+ - Medical bills with incorrect ICD will be rejected and the customer and hospital will be informed. 
  - The refund amount will be calculated if the medical bill reference to correct ICD and to an existing customer. 
- - The refund amount will be calculated according to insurance policy type and duration of the contract with MHI.
+ - The refund amount will be calculated according to the refund percentage (according to insurance policy type) and the full amount of the medical bill.
  - As a final part, the customer will be informed about the payment, the case will be registered in MHI-Database and the financial department will be informed to release the payment. 
 
 # High Level Process
@@ -31,7 +31,7 @@ All previous points were painstaking and lets to time-cost. Therefore, the elder
 
 # Assumptions/Exceptions
 
-There are several ICD-Code involved in a real medical case. We focus on one ICD based on Simon’s case in our project and align the automated process mainly to it. So, we have taken one ICD to simplify the process and used a list of correct and incorrect ICDs to compare. Overall, the analyses of ICD will hold simple and easy. We assume in this situation that a medical case has only one ICD on a medical bill. 
+There are several ICD involved in a real medical case. We focus on one ICD based on Simon’s case in our project and align the automated process mainly to it. So, we have taken one ICD to simplify the process and used a list of correct and incorrect ICD to compare. Overall, the analyses of ICD will hold simple and easy. We assume in this situation that a medical case has only one ICD on a medical bill. 
 
 # Features
 
