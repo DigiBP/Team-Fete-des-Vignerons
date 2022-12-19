@@ -7,13 +7,13 @@
           <text>customerClass</text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Threshold" name="threshold" typeRef="long" biodi:width="192" />
+      <output id="Output_1" label="Threshold" name="threshold" typeRef="double" biodi:width="192" />
       <rule id="DecisionRule_0bjqxdf">
         <inputEntry id="UnaryTests_0ocy4ph">
           <text>"Basic"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0jgxe8e">
-          <text>0</text>
+          <text>0.1</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_19pz97k">
@@ -21,7 +21,7 @@
           <text>"Classic"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0qsg7dc">
-          <text>.2</text>
+          <text>0.2</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0uia48h">
@@ -29,7 +29,7 @@
           <text>"Middle"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_06zthve">
-          <text>.4</text>
+          <text>0.4</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_11ax9t6">
@@ -37,7 +37,7 @@
           <text>"Advanced"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0dgjk2d">
-          <text>.6</text>
+          <text>0.6</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1i95x6q">
@@ -45,7 +45,7 @@
           <text>"Premium"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0yym2yc">
-          <text>.8</text>
+          <text>0.8</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0n7aus2">

@@ -7,17 +7,13 @@
           <text></text>
         </inputExpression>
       </input>
-      <output id="Output_1" label="Cat case?" name="icCatCase" typeRef="boolean" biodi:width="225" />
       <output id="OutputClause_1fcf4bx" label="Explanation" name="explanation" typeRef="string" biodi:width="439" />
-      <output id="OutputClause_1xm1giq" name="needsMC" typeRef="boolean" />
+      <output id="OutputClause_1xm1giq" name="needsCM" typeRef="boolean" />
       <rule id="DecisionRule_1bnkkjb">
         <description></description>
         <inputEntry id="UnaryTests_1c8ydpl">
           <text>"ICD-T00.0"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1mety91">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0s65na2">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -29,9 +25,6 @@
         <inputEntry id="UnaryTests_1qyodil">
           <text>"ICD-T00.2"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_17jpbmh">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0xtp7zf">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -43,9 +36,6 @@
         <inputEntry id="UnaryTests_00e0x0r">
           <text>"ICD-T00.9"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1u0xsku">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1c6i4jd">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -57,9 +47,6 @@
         <inputEntry id="UnaryTests_0vvpisd">
           <text>"ICD-T14.1"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1vbp6pc">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_03d3tvk">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -71,9 +58,6 @@
         <inputEntry id="UnaryTests_0fnz7wv">
           <text>"ICD-S10.7"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0hh0xs5">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1l1ox6y">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -83,11 +67,8 @@
       </rule>
       <rule id="DecisionRule_0v1xctr">
         <inputEntry id="UnaryTests_1mo6kxh">
-          <text>"ICD-S01.21"</text>
+          <text>"ICD-S01.2"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1lqozym">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0v6ois8">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -97,11 +78,8 @@
       </rule>
       <rule id="DecisionRule_17bn12a">
         <inputEntry id="UnaryTests_1ltmj60">
-          <text>"ICD-S01.42"</text>
+          <text>"ICD-S01.7"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0wpfras">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1kjj8im">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -111,11 +89,8 @@
       </rule>
       <rule id="DecisionRule_0e7jsi4">
         <inputEntry id="UnaryTests_0zfdxgj">
-          <text>"ICD-S01.41"</text>
+          <text>"ICD-S01.8"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1y0u29g">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0g6z9mv">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -125,11 +100,8 @@
       </rule>
       <rule id="DecisionRule_1pxv9mw">
         <inputEntry id="UnaryTests_10b0ikh">
-          <text>"ICD-S01.43"</text>
+          <text>"ICD-S01.4"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0b2mzmw">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1im5xp4">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -141,9 +113,6 @@
         <inputEntry id="UnaryTests_1h0gyyd">
           <text>"ICD-J10.1"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1akg8yc">
-          <text>true</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1ugf9ll">
           <text>"This ICD code corresponds to a cat bite-like incident. This bill is correct and may be payable depending on the insurance policy."</text>
         </outputEntry>
@@ -155,93 +124,72 @@
         <inputEntry id="UnaryTests_1pc5ykg">
           <text>"ICD-A05.3"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0hkkau9">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0mstvna">
           <text>"This ICD code does not refer to an incident similar to a cat bite. Please check for correctness of billing."</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0r61pel">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0oqmftl">
         <inputEntry id="UnaryTests_1redmpk">
           <text>"ICD-A05.4"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0ka624k">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0f69m38">
           <text>"This ICD code does not refer to an incident similar to a cat bite. Please check for correctness of billing."</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1czftyn">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0fxzgnv">
         <inputEntry id="UnaryTests_1np8v37">
           <text>"ICD-A07.9"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0hrleed">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1lras4h">
           <text>"This ICD code does not refer to an incident similar to a cat bite. Please check for correctness of billing."</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0sqnt6h">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1ykc5hy">
         <inputEntry id="UnaryTests_10tc47c">
           <text>"ICD-A06.5"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0ms8018">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_0o6lnsl">
           <text>"This ICD code does not refer to an incident similar to a cat bite. Please check for correctness of billing."</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_13yab0l">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1bm09oe">
         <inputEntry id="UnaryTests_05ak57v">
           <text>"ICD-A06.3"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0snl2h4">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1nso0nv">
           <text>"This ICD code does not refer to an incident similar to a cat bite. Please check for correctness of billing."</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1gjlxs2">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1pcbymk">
         <inputEntry id="UnaryTests_1ev0mu2">
           <text>"ICD-A04.5"</text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1t5qfsq">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_1pzin9f">
           <text>"This ICD code does not refer to an incident similar to a cat bite. Please check for correctness of billing."</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0j5z5m3">
-          <text>false</text>
+          <text>true</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_02p2azu">
         <inputEntry id="UnaryTests_0w81zne">
           <text></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_01uql7l">
-          <text>false</text>
-        </outputEntry>
         <outputEntry id="LiteralExpression_14wc76z">
           <text></text>
         </outputEntry>
