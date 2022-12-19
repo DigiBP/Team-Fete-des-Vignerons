@@ -31,8 +31,10 @@ All previous points were painstaking and the agent of MHI needs a lot of time fo
 
 # Features
 
+
+
 # Methodologies
-The project team activated a Trello board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
+The project team activated a Teams board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
 
 ## Organisational
 
