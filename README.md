@@ -47,7 +47,7 @@ The DMN “ANALYSE THE CASE ON ICD” checks if Simon’s case is coherent with 
 The script of the process calculates the percentage and the refund amount from the customer. There-fore, the script uses different variables from previous features. 
 
 ## Gateways
-There are several Gateways used in the entire process. The Exclusive Gateways allows us to answer to “YES” or “NO” Questions. Therefore, an example is the question: “If a further check by the Medical Health Insurance needed?”. A Parallel Gateways take over different task on the same time. A good practice in our case is that customer and hospital will be informed about the cancellation on the same time. 
+There are several Gateways used in the entire process. The Exclusive Gateways allows us to answer to “YES” or “NO” Questions. Therefore, an example is the question if a further check by the Medical Health Insurance needed. A Parallel Gateways take over different task on the same time. A good practice in our case is that customer and hospital will be informed about the cancellation on the same time. 
 
 # Methodologies
 The project team activated a Teams board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
