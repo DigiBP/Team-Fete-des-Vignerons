@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a part of the assignment of the module Digitalization of Business Processes in Master of Science in Medical Informatics and in Business Information Systems. Students have to digitalise a pro-cess and deliver modelling artefacts as Business Process Model and Notation and Decision Model and Notation with the appropriate source file and code. Furthermore, students provide documentation of the complete process and the link to the workflows and instantiations. 
+This project is a part of the assignment of the module Digitalization of Business Processes in Master of Science in Medical Informatics and Business Information Systems. Students have to digitalise a pro-cess and deliver modelling artefacts as Business Process Model and Notation and Decision Model and Notation with the appropriate source file and code. Furthermore, students provide documentation of the complete process and the link to the workflows and instantiations. 
 
 ## Scenario
 Cats have been human companions for millennia, and their fanbase seems to be ever and ever rising, with an estimated 1.8 million living in Swiss households in 2022 (https://de.statista.com/statistik/daten/studie/283732/umfrage/katzen-in-der-schweiz/). 
