@@ -27,11 +27,27 @@ All previous points were painstaking and the agent of MHI needs a lot of time fo
 # High Level Process
 <img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://github.com/DigiBP/Team-Fete-des-Vignerons/blob/2d82ac211068be3f187db763e93540a7dc2bd41d/Scenario_Flow_Chart.png">
 
-# Assumptions
+# Assumptions/Exceptions
+There are several ICD-Code involved in a real medical case. We focus on Simon’s case in our project and align the automated process mainly to it. So, we have taken one ICD to simplify the process and used a list of correct and incorrect ICDs to compare. Overall, the analyses of ICD will hold simple and easy. We assume in this situation that a medical case has only one ICD on a medical bill. 
 
 # Features
 
+## User Task
+The user task will be handled directly by the Medical Health Insurance or Checkmedical agents. There-fore, the intern agent of MHI could claim the Task in Heroku App. External Partner as Checkmedical receive a mail from MHI.
 
+## DMN’s
+There are two different DMN’s in the entire process. There following subparagraph are going to focus on detail: 
+### CHECK THRESHOLD
+The threshold DMN clusters according to the customer’s type of insurance policy. This part of the pro-cess will bring out the refund amount that the customers will receive at the end. The types of insurance policy and refund percentages are Basic (0%), Classic (20%), Middle (40%), Advanced (60%) and Premi-um (80%). The customer must pay 20% of the cost on his own. 
+
+### ANALYSE THE CASE ON ICD
+The DMN “ANALYSE THE CASE ON ICD” checks if Simon’s case is coherent with the medical bill. There-fore, we used a list of correct and incorrect ICDs to compare. The fake bill will have one ICD attached and this will be scanned with the function OCR. Finally, the ICD will be compared and reveal if a true or false ICD is used in Simon’s medical bill. We have different fake bills to play different conditions through. 
+
+## Script
+The script of the process calculates the percentage and the refund amount from the customer. There-fore, the script uses different variables from previous features. 
+
+## Gateways
+There are several Gateways used in the entire process. The Exclusive Gateways allows us to answer to “YES” or “NO” Questions. Therefore, an example is the question: “If a further check by the Medical Health Insurance needed?”. A Parallel Gateways take over different task on the same time. A good practice in our case is that customer and hospital will be informed about the cancellation on the same time. 
 
 # Methodologies
 The project team activated a Teams board to support agile implementation of the project. Initial brainstorming was done using design thinking techniques and literature search supported by external outreach.
@@ -80,5 +96,3 @@ Target to communicate
 Think omnichannel
 Push products, services, and people
 Future cross sell
-
-
