@@ -25,7 +25,7 @@ All previous points were painstaking and the agent of MHI needs a lot of time fo
  - As a final part, the customer will be informed about the payment, the case will be registered in MHI-Database and the financial department will be informed to release the payment. 
 
 # High Level Process
-<img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://user-images.githubusercontent.com/106623917/200399156-4833248c-4116-4848-ace1-f14bcfff3c54.png">
+<img width="726" alt="Screenshot 2022-11-07 at 20 37 15" src="https://github.com/DigiBP/Team-Fete-des-Vignerons/blob/2d82ac211068be3f187db763e93540a7dc2bd41d/Scenario_Flow_Chart.png">
 
 # Assumptions
 
