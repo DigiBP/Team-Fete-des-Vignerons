@@ -19,7 +19,7 @@ All previous points were painstaking and lets to time-cost. Therefore, the elder
  - Non-registered customers should be contacted and will be handled as potential customers for the future. 
  - The system should run through the details of the customer, should check the details, and should give out the percentage of the payment according to the customers insurance type. 
  - The system should go through the ICD on the medical bill and verifies if the case can be referenced to the case. 
- - The system should send a mail to Checkmedical company for detailed clearance if the ICD does not rely on the case.
+ - The system should send a mail to Checkmedical company for detailed clearance if the ICD does not relate to the case.
  - Medical bills with incorrect ICD will be rejected and the customer and hospital will be informed. 
  - The payment amount will be calculated if the medical bill reference to correct ICD and to an existing customer. 
  - The payment amount will be calculated according to the payment percentage (according to insurance policy type) and the full amount of the medical bill.
