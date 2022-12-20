@@ -49,7 +49,7 @@ The threshold DMN clusters according to the customer’s type of insurance polic
 
 ### ANALYSE THE CASE ON ICD
 
-The DMN “ANALYSE THE CASE ON ICD” checks if Simon’s case is coherent with the medical bill. Therefore, we used a list of correct and incorrect ICDs to compare. The fake bill will have one ICD attached and this will be scanned with the function OCR. Finally, the ICD will be compared and reveal if a true or false ICD is used in Simon’s medical bill. We have different fake bills to play different conditions through. 
+The DMN “ANALYSE THE CASE ON ICD” checks if Simon’s case is coherent with the medical bill. Therefore, we used a list of correct and incorrect ICDs to compare. The fake bill will have one ICD attached and this will be scanned with the function OCR. Finally, the ICD will be compared and reveal if a true or false ICD is used in Simon’s medical bill. We have different fake bills to play different conditions through. The explanation of ICDs is given as list in Excel format.  
 
 ## Script
 
