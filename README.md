@@ -2,27 +2,27 @@
 
 ## Introduction
 
-This project is a part of the assignment of the module Digitalization of Business Processes in Master of Science in Medical Informatics. Students have to digitalise a process and deliver modelling artefacts as Business Process Model and Notation and Decision Model and Notation with the appropriate source file and code. Furthermore, students provide documentation of the complete process and the link to the workflows and instantiations. 
+This project is a part of the assignment of the module Digitalization of Business Processes in Master of Science in Medical Informatics and Business Information Systems. Students have to digitalise a process and deliver modelling artefacts as Business Process Model and Notation and Decision Model and Notation with the appropriate source file and code. Furthermore, students provide documentation of the complete process and the link to the workflows and instantiations. 
 
 ## Scenario
 
 Cats have been human companions for millennia, and their fanbase seems to be ever and ever rising, with an estimated 1.8 million living in Swiss households in 2022 (https://de.statista.com/statistik/daten/studie/283732/umfrage/katzen-in-der-schweiz/). 
 
-In this scenario, one cat named “Cat” plays a leading role with his owner Simon. Most of the time, Cat eats, lie around, and explores different environments and areas. Sometimes, Cat can be challenging. Especially, if Simon forgets to feed him. In those cases, Cat tries to get back at his owner. Peculiarly, the cat tries to wake up him in different ways to get fed. Therefore, Cat walks around meowing. Cat intentionally broke a vase, so the loud smashing sound would wake Simon up, but it was not successful. Moreover, Cat climbs onto the cupboard to try to jump on Simon’s face. But suddenly the cupboard falls on Simon and hurts him. This resulted in several injuries on Simon's face, broken bones, lengthy treatment, and a long stay in the hospital. Finally, Simon receives the medical bill which he passes to his Health Insurance. 
+In this scenario, one cat named “Cat” plays a leading role with his owner Simon. Most of the time, Cat eats, lie around, and explores different environments and areas. Sometimes, Cat can be challenging. Especially, if Simon forgets to feed him. In those cases, Cat tries to get back at his owner. Peculiarly, the cat tries to wake up him in different ways to get fed. Therefore, Cat walks around meowing. Cat intentionally broke a vase, so the loud smashing sound would wake Simon up, but it was not successful. Moreover, Cat climbs onto the cupboard to try to jump on Simon’s face. But suddenly the cupboard falls on Simon and hurts him. This resulted in several injuries on Simon's face, lengthy treatment, and a long stay in the hospital. Finally, Simon receives the medical bill which he passes to his Health Insurance. 
 
-The Health Insurance “Medical Health Insurance” shortened MHI is in doubt about the invoice. In general, more and more frauds try to get refunds for all kinds of medical expenses even if they are not a customer of MHI. Furthermore, even the hospitals use incorrect ICD to get treatment and hospital stays reimbursed which does not rely on the main cause of the admission to the hospital. Therefore, MHI agents check all medical bills in detail by their hands and disputed the invoice by different Medical Codes (e.g., ICD) which were not suitable for that case in relation to the doctor’s documentation. MHI work along with CHECKMEDICAL from Bern for further assistance. They are focused on checking medical bills based on their long-term medical experience and support MHI in clearing their fraudulent medical bills. 
+The Health Insurance “Medical Health Insurance” shortened MHI is in doubt about the invoice. In general, more and more frauds try to get medical bills paid for all kinds of medical expenses even if they are not a customer of MHI. Furthermore, even the hospitals use incorrect ICDs to get treatment and hospital stays reimbursed which does not rely on the main cause of the admission to the hospital. Therefore, MHI agents check all medical bills in detail by their hands and disputed the invoice by different Medical Codes (e.g., ICD) which were not suitable for that case in relation to the doctor’s documentation. MHI work along with Checkmedical from Bern for further assistance. They are focused on checking medical bills based on their long-term medical experience and support MHI in clearing their fraudulent medical bills. 
 
 All previous points were painstaking and lets to time-cost. Therefore, the elderly CEO of MHI decided to give digitalization a try, and asked FHNW students to set up the following processes:
 
  - Through an online form, the customer should be able to send in the medical bill with their details 
  - The system should check automatically if the customer is one of the existing clientele. 
  - Non-registered customers should be contacted and will be handled as potential customers for the future. 
- - The system should run through the details of the customer, should check the details, and should give out the percentage of the refund according to the customers insurance type. 
+ - The system should run through the details of the customer, should check the details, and should give out the percentage of the payment according to the customers insurance type. 
  - The system should go through the ICD on the medical bill and verifies if the case can be referenced to the case. 
  - The system should send a mail to Checkmedical company for detailed clearance if the ICD does not rely on the case.
  - Medical bills with incorrect ICD will be rejected and the customer and hospital will be informed. 
- - The refund amount will be calculated if the medical bill reference to correct ICD and to an existing customer. 
- - The refund amount will be calculated according to the refund percentage (according to insurance policy type) and the full amount of the medical bill.
+ - The payment amount will be calculated if the medical bill reference to correct ICD and to an existing customer. 
+ - The payment amount will be calculated according to the payment percentage (according to insurance policy type) and the full amount of the medical bill.
  - As a final part, the customer will be informed about the payment, the case will be registered in MHI-Database and the financial department will be informed to release the payment. 
 
 # High Level Process
@@ -45,15 +45,15 @@ There are two different DMN’s in the entire process. These following subparagr
 
 ### CHECK THRESHOLD
 
-The threshold DMN clusters according to the customer’s type of insurance policy. This part of the process will bring out the refund amount that the customers will receive at the end. The types of insurance policy and refund percentages are Basic (0%), Classic (20%), Middle (40%), Advanced (60%) and Premi-um (80%). The customer must pay 20% of the cost on his own. 
+The threshold DMN clusters according to the customer’s type of insurance policy. This part of the process will bring out the payment amount that the customers will receive at the end. The types of insurance policy and payment percentages are Basic (0%), Classic (20%), Middle (40%), Advanced (60%) and Premi-um (80%). The customer must pay 20% of the cost on his own. 
 
 ### ANALYSE THE CASE ON ICD
 
-The DMN “ANALYSE THE CASE ON ICD” checks if Simon’s case is coherent with the medical bill. Therefore, we used a list of correct and incorrect ICDs to compare. The fake bill will have one ICD attached and this will be scanned with the function OCR. Finally, the ICD will be compared and reveal if a true or false ICD is used in Simon’s medical bill. We have different fake bills to play different conditions through. The explanation of ICDs is given as list in Excel format.  
+The DMN “ANALYSE THE CASE ON ICD” checks if Simon’s case is coherent with the medical bill. Therefore, we used a list of correct and incorrect ICDs to compare. The fake bill will have one ICD attached and this will be scanned with the function OCR. Finally, the ICD will be compared and reveal if a true or false ICD is used in Simon’s medical bill. We have different fake bills to play different conditions through. 
 
 ## Script
 
-The script of the process calculates the percentage and the refund amount from the customer. Therefore, the script uses different variables from previous stages and features. 
+The script of the process calculates the percentage and the payment amount from the customer. Therefore, the script uses different variables from previous stages and features. 
 
 ## Gateways
 
