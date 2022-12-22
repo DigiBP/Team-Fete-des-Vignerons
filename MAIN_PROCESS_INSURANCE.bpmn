@@ -38,6 +38,157 @@
       <bpmn:incoming>Flow_097g155</bpmn:incoming>
       <bpmn:outgoing>Flow_0bdngnv</bpmn:outgoing>
     </bpmn:parallelGateway>
+<<<<<<< Updated upstream
+=======
+    <bpmn:endEvent id="Event_1pjv54q" name="Case closed">
+      <bpmn:incoming>Flow_12sdyku</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_1ud37jh">
+      <bpmn:incoming>Flow_1vr1mdk</bpmn:incoming>
+      <bpmn:incoming>Flow_039p3fo</bpmn:incoming>
+      <bpmn:outgoing>Flow_12rxwxo</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0owjyb3" name="Rejected the case?">
+      <bpmn:incoming>Flow_1wncjdm</bpmn:incoming>
+      <bpmn:outgoing>Flow_039p3fo</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0d4i2fr</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_0p2z79i" name="Case closed">
+      <bpmn:incoming>Flow_0bdngnv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:scriptTask id="Activity_1q8rj4y" name="Calculate payment amount" scriptFormat="JavaScript" camunda:resultVariable="finalAmount">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="amount">${amount}</camunda:inputParameter>
+          <camunda:inputParameter name="threshold">${threshold}</camunda:inputParameter>
+          <camunda:outputParameter name="finalAmount">${finalAmount}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12rxwxo</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tp7xl4</bpmn:outgoing>
+      <bpmn:script>amount*threshold</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:startEvent id="StartInsuranceProcess" name="Medical bill received">
+      <bpmn:extensionElements>
+        <camunda:formData businessKey="businessKey">
+          <camunda:formField id="isExistingCustomer" label="Is the request coming from an existing customer?" type="boolean" />
+          <camunda:formField id="preferredMeanOfContact" label="preferredMeanOfContact" type="string" />
+          <camunda:formField id="amount" label="amount" type="long" />
+          <camunda:formField id="customerClass" label="customerClass" type="string" />
+          <camunda:formField id="icd" label="ICD" type="string" />
+          <camunda:formField id="businessKey" label="businessKey" type="string" />
+          <camunda:formField id="customerid" label="ID of existing customer" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_045zopf</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0cq8fra" messageRef="Message_0cp5fdb" />
+    </bpmn:startEvent>
+    <bpmn:sendTask id="Activity_0apm832" name="Send to CheckMedical" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Ask_CM&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}">
+      <bpmn:incoming>Flow_1h3f88a</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cryr2g</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:intermediateCatchEvent id="CM_Answer">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_1kopp6c" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0cryr2g</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wncjdm</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_14h15zb" messageRef="Message_18947iq" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_0w9hdh8" name="yes" sourceRef="Gateway_1k06xjm" targetRef="Gateway_0jinnqu">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0d5o9q4" name="yes" sourceRef="Gateway_0jinnqu" targetRef="Activity_0cucksn">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_05l1tak" name="no" sourceRef="Gateway_0jinnqu" targetRef="Activity_03auzcy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1c6z44n" sourceRef="Activity_15iw8my" targetRef="Gateway_1c04vn2" />
+    <bpmn:sequenceFlow id="Flow_1vr1mdk" name="no" sourceRef="Gateway_1c04vn2" targetRef="Gateway_1ud37jh">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!needsCM}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1h3f88a" name="yes" sourceRef="Gateway_1c04vn2" targetRef="Activity_0apm832">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${needsCM}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0tp7xl4" sourceRef="Activity_1q8rj4y" targetRef="Gateway_10snki9" />
+    <bpmn:sequenceFlow id="Flow_1wratum" sourceRef="Gateway_10snki9" targetRef="Activity_0t6fje4">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${notify}" event="take">
+          <camunda:field name="URL">
+            <camunda:expression> https://hook.eu1.make.com/eeeb8y8xu7k1mp6w7n8lsrnmxkdgppcu?insuranceid=${customerid}</camunda:expression>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_12epv4d" sourceRef="Gateway_10snki9" targetRef="Activity_1n0o3jl">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${notify}" event="take">
+          <camunda:field name="URL">
+            <camunda:expression>https://hook.eu1.make.com/d416yd0n4eequ9pfryxsh44aq2t5t1pv</camunda:expression>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0l03dhi" sourceRef="Activity_0t6fje4" targetRef="Gateway_1hmg1qe" />
+    <bpmn:sequenceFlow id="Flow_0rhrhjr" sourceRef="Activity_1n0o3jl" targetRef="Gateway_1hmg1qe" />
+    <bpmn:sequenceFlow id="Flow_0bdngnv" sourceRef="Gateway_1hmg1qe" targetRef="Event_0p2z79i" />
+    <bpmn:sequenceFlow id="Flow_0c3si67" sourceRef="Activity_03auzcy" targetRef="Gateway_1k06xjm" />
+    <bpmn:sequenceFlow id="Flow_12sdyku" name="no" sourceRef="Gateway_1k06xjm" targetRef="Event_1pjv54q">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isExistingCustomer}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_039p3fo" name="no" sourceRef="Gateway_0owjyb3" targetRef="Gateway_1ud37jh">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isCaseRejected}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_12rxwxo" sourceRef="Gateway_1ud37jh" targetRef="Activity_1q8rj4y" />
+    <bpmn:sequenceFlow id="Flow_1wncjdm" sourceRef="CM_Answer" targetRef="Gateway_0owjyb3" />
+    <bpmn:sequenceFlow id="Flow_0d4i2fr" name="yes" sourceRef="Gateway_0owjyb3" targetRef="Activity_00zc9y0">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${notify}" event="take">
+          <camunda:field name="URL">
+            <camunda:expression>https://hook.eu1.make.com/d416yd0n4eequ9pfryxsh44aq2t5t1pv?businesskey=${businessKey}&amp;Status=Cancelled</camunda:expression>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isCaseRejected}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ri7rz8" sourceRef="Activity_00zc9y0" targetRef="Event_1hrbfwa" />
+    <bpmn:sequenceFlow id="Flow_045zopf" sourceRef="StartInsuranceProcess" targetRef="Gateway_0jinnqu" />
+    <bpmn:sequenceFlow id="Flow_0sui50h" sourceRef="Activity_0cucksn" targetRef="Activity_15iw8my" />
+    <bpmn:sequenceFlow id="Flow_0cryr2g" sourceRef="Activity_0apm832" targetRef="CM_Answer" />
+    <bpmn:businessRuleTask id="Activity_0cucksn" name="Check threshold" camunda:resultVariable="threshold" camunda:decisionRef="Decision_0copolb" camunda:mapDecisionResult="singleEntry" camunda:decisionRefTenantId="fetevignerons">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="customerClass">${customerClass}</camunda:inputParameter>
+          <camunda:outputParameter name="threshold">${threshold}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0d5o9q4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sui50h</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:businessRuleTask id="Activity_15iw8my" name="Analyse the case on ICD" camunda:resultVariable="icdResult" camunda:decisionRef="Decision_1rxwil9" camunda:mapDecisionResult="singleResult" camunda:decisionRefTenantId="fetevignerons">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="explanation">${icdResult.get("explanation")}</camunda:outputParameter>
+          <camunda:outputParameter name="needsCM">${icdResult.get("needsCM")}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0sui50h</bpmn:incoming>
+      <bpmn:outgoing>Flow_1c6z44n</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="Activity_0t6fje4" name="Inform customer about payment" camunda:type="external" camunda:topic="InformCustomer">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1wratum</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l03dhi</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_00zc9y0" name="Inform customer about cancellation" camunda:type="external" camunda:topic="InformCustomer">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_0d4i2fr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ri7rz8</bpmn:outgoing>
+    </bpmn:serviceTask>
+>>>>>>> Stashed changes
     <bpmn:endEvent id="Event_1hrbfwa" name="Case closed">
       <bpmn:incoming>Flow_0xwabza</bpmn:incoming>
     </bpmn:endEvent>
@@ -50,6 +201,7 @@
       <bpmn:outgoing>Flow_12sdyku</bpmn:outgoing>
       <bpmn:outgoing>Flow_0w9hdh8</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+<<<<<<< Updated upstream
     <bpmn:endEvent id="Event_1pjv54q" name="Case closed">
       <bpmn:incoming>Flow_12sdyku</bpmn:incoming>
       <bpmn:incoming>Flow_068zgy7</bpmn:incoming>
@@ -197,6 +349,38 @@
     <bpmn:startEvent id="Event_0wdwsp2" name="Received mail from insurance">
       <bpmn:outgoing>Flow_08ganbv</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_00itzkg" />
+=======
+    <bpmn:serviceTask id="Activity_1n0o3jl" name="Register the case on database" camunda:type="external" camunda:topic="UpdateCustomer">
+      <bpmn:incoming>Flow_12epv4d</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rhrhjr</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_0cp5fdb" name="StartMIProcess" />
+  <bpmn:process id="CM" name="CM" isExecutable="true">
+    <bpmn:userTask id="Activity_1kk5sxf" name="Manually check case">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="CM_Reason" label="What is the reason for your decision?" type="string" />
+          <camunda:formField id="isCaseRejected" label="Should the case be rejected?" type="boolean" defaultValue="false" />
+          <camunda:formField id="amount" label="amount" type="long">
+            <camunda:validation />
+          </camunda:formField>
+          <camunda:formField id="icd" label="icd" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_003aiix</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bt3y00</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="Start_Checkmedical" name="Start Checkmedical">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="amount" label="Amount of case" type="long" />
+          <camunda:formField id="icd" label="ICD of case" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_003aiix</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0qiydxh" messageRef="Message_1ciqg45" />
+>>>>>>> Stashed changes
     </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_1uabym3" name="Create a case">
       <bpmn:incoming>Flow_08ganbv</bpmn:incoming>
@@ -251,7 +435,63 @@
         <dc:Bounds x="2255" y="555" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0kxsnlo_di" bpmnElement="Gateway_1hmg1qe">
+<<<<<<< Updated upstream
         <dc:Bounds x="2605" y="555" width="50" height="50" />
+=======
+        <dc:Bounds x="2515" y="555" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pjv54q_di" bpmnElement="Event_1pjv54q">
+        <dc:Bounds x="1162" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1150" y="275" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ud37jh_di" bpmnElement="Gateway_1ud37jh" isMarkerVisible="true">
+        <dc:Bounds x="1475" y="555" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_09x5chs" bpmnElement="Gateway_0owjyb3" isMarkerVisible="true">
+        <dc:Bounds x="1475" y="795" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1509" y="776" width="62" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0p2z79i_di" bpmnElement="Event_0p2z79i">
+        <dc:Bounds x="2622" y="562" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2610" y="605" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0icynik_di" bpmnElement="Activity_1q8rj4y">
+        <dc:Bounds x="1750" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tbcq3j_di" bpmnElement="StartInsuranceProcess">
+        <dc:Bounds x="222" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="213" y="455" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_187ha1q_di" bpmnElement="Activity_0apm832">
+        <dc:Bounds x="1150" y="780" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dn3tay_di" bpmnElement="CM_Answer">
+        <dc:Bounds x="1332" y="802" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04z2xvf_di" bpmnElement="Activity_0cucksn">
+        <dc:Bounds x="610" y="540" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_187uito_di" bpmnElement="Activity_15iw8my">
+        <dc:Bounds x="800" y="540" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06tn4mj_di" bpmnElement="Activity_0t6fje4">
+        <dc:Bounds x="2320" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14g4ics_di" bpmnElement="Activity_00zc9y0">
+        <dc:Bounds x="1750" y="780" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+>>>>>>> Stashed changes
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1ow9sya" bpmnElement="Event_1hrbfwa">
         <dc:Bounds x="2172" y="802" width="36" height="36" />
@@ -269,8 +509,18 @@
           <dc:Bounds x="1155" y="347" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+<<<<<<< Updated upstream
       <bpmndi:BPMNShape id="Event_1pjv54q_di" bpmnElement="Event_1pjv54q">
         <dc:Bounds x="1252" y="232" width="36" height="36" />
+=======
+      <bpmndi:BPMNShape id="Activity_189hqhk_di" bpmnElement="Activity_1n0o3jl">
+        <dc:Bounds x="2320" y="660" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0w9hdh8_di" bpmnElement="Flow_0w9hdh8">
+        <di:waypoint x="1030" y="325" />
+        <di:waypoint x="1030" y="430" />
+        <di:waypoint x="515" y="430" />
+>>>>>>> Stashed changes
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1240" y="275" width="61" height="14" />
         </bpmndi:BPMNLabel>
